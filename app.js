@@ -2,6 +2,7 @@ const fs = require("fs");
 const axios = require("axios");
 const express = require("express");
 const { kMaxLength } = require("buffer");
+const { response } = require("express");
 
 const app = express();
 
@@ -125,6 +126,28 @@ dd`);
   }
   };
   getUsers()
+
+  const saveUsers = async() => {
+    for (let x = 1 ; x <= 10   ; x++){
+      try {
+        const response = await axios.get(
+          "https://jsonplaceholder.typicode.com/users/"+ x 
+        );
+        dat = JSON.stringify(response.data)
+        fs.appendFile("users.txt",`
+        ${dat}
+        `     ,  (err) => {
+          if (err) throw err;
+          console.log(`done`);
+        });
+      } catch (err) {
+        throw err;
+      }
+  };
+
+}
+  // saveUsers()
+
 });
 
 app.listen(port, () => {
