@@ -51,23 +51,24 @@ app.get("/", (req, res) => {
   };
 
   const appendToFile = (data) => {
-    fs.appendFile('data.txt', data, 'utf8' ,(err) => {
+    fs.appendFile("data.txt", data, "utf8", (err) => {
       if (err) throw err;
       console.log(`The ${data} was appended to file!`);
     });
   };
   // to add in new line
-  appendToFile(`
-dd`)
+  /*appendToFile(`
+dd`);
+*/
 
   const copyFile = (fileName) => {
-    fs.copyFile(fileName + ".txt", "copy_of_" +fileName + ".txt", (err)=> {
+    fs.copyFile(fileName + ".txt", "copy_of_" + fileName + ".txt", (err) => {
       if (err) throw err;
-  console.log('done');
-  });
+      console.log("done");
+    });
   };
-  copyFile("data")
-
+  //copyFile("data");
+  
   const newPost = JSON.stringify({
     title: "JavaScript Basics",
     body: "This post contains information about javaScript ",
@@ -76,9 +77,9 @@ dd`)
   });
   
   const createPost = (post) => {
-    post = JSON.parse(post)
+    post = JSON.parse(post);
     axios
-      .post("https://jsonplaceholder.typicode.com/posts/" , post)
+      .post("https://jsonplaceholder.typicode.com/posts/", post)
       .then((response) => {
         console.log(response.data);
       })
@@ -87,9 +88,29 @@ dd`)
         throw err;
       });
   };
-  createPost(newPost)
+  createPost(newPost);
 
-
+  const upPost = JSON.stringify({
+    id: 1,
+    title: "Updated Title",
+    body: "Updated body",
+    userId: 1,
+  });
+  
+  const updatePost = (id, data) => {
+    data = JSON.parse(data);
+    axios
+      .put("https://jsonplaceholder.typicode.com/posts/" + id, data)
+      .then((response) => {
+        console.log(response.data);
+      })
+      // in `.catch()` we add the code to handel the error
+      .catch((err) => {
+        throw err;
+      });
+  };
+  
+  updatePost(1, upPost);
 });
 
 app.listen(port, () => {
