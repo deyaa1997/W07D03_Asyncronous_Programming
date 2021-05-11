@@ -17,7 +17,6 @@ app.get("/", (req, res) => {
       console.log(content);
     });
   };
-  readFile();
 
   const writeFile = () => {
     fs.writeFile("text.txt", "Hello World", (err) => {
@@ -25,7 +24,6 @@ app.get("/", (req, res) => {
       console.log("The file has been saved");
     });
   };
-  writeFile();
 
   const getPost = (id) => {
     axios
@@ -38,7 +36,6 @@ app.get("/", (req, res) => {
         throw err;
       });
   };
-
   getPost(1);
   getPost(50);
 
@@ -52,8 +49,16 @@ app.get("/", (req, res) => {
       throw err;
     }
   };
-  getPostAsync(1);
-  getPostAsync(50);
+
+  const appendToFile = (data) => {
+    fs.appendFile('data.txt', data, 'utf8' ,(err) => {
+      if (err) throw err;
+      console.log(`The ${data} was appended to file!`);
+    });
+  };
+  appendToFile(`
+dd`)
+
 });
 
 app.listen(port, () => {
