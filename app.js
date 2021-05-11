@@ -68,6 +68,26 @@ dd`)
   };
   copyFile("data")
 
+  const newPost = JSON.stringify({
+    title: "JavaScript Basics",
+    body: "This post contains information about javaScript ",
+    // the id of the user who is going to create the post
+    userId: 1,
+  });
+  
+  const createPost = (post) => {
+    post = JSON.parse(post)
+    axios
+      .post("https://jsonplaceholder.typicode.com/posts/" , post)
+      .then((response) => {
+        console.log(response.data);
+      })
+      // in `.catch()` we add the code to handel the error
+      .catch((err) => {
+        throw err;
+      });
+  };
+  createPost(newPost)
 
 
 });
