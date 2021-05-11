@@ -56,8 +56,19 @@ app.get("/", (req, res) => {
       console.log(`The ${data} was appended to file!`);
     });
   };
+  // to add in new line
   appendToFile(`
 dd`)
+
+  const copyFile = (fileName) => {
+    fs.copyFile(fileName + ".txt", "copy_of_" +fileName + ".txt", (err)=> {
+      if (err) throw err;
+  console.log('done');
+  });
+  };
+  copyFile("data")
+
+
 
 });
 
