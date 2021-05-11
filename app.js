@@ -26,6 +26,20 @@ app.get("/" , (req,res) => {
       };
       writeFile();
 
+      const getPost = (id) => {
+        axios.get("https://jsonplaceholder.typicode.com/posts/" + id)
+        .then((response) => {
+            console.log(response.data);
+          })
+          // in `.catch()` we add the code to handel the error
+          .catch((err) => {
+            throw err;
+          });
+      };
+      
+      getPost(1);
+      getPost(50);
+
 })
 
 
