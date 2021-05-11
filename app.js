@@ -111,6 +111,20 @@ dd`);
   };
   
   updatePost(1, upPost);
+
+  const getUsers = async() => {
+    for (let x = 1 ; x <= 10   ; x++){
+    try {
+      const response = await axios.get(
+        "https://jsonplaceholder.typicode.com/users/"+ x 
+      );
+      console.log(response.data);
+    } catch (err) {
+      throw err;
+    }
+  }
+  };
+  getUsers()
 });
 
 app.listen(port, () => {
